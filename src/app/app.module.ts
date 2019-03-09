@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { GridComponent } from './grid/grid.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GridComponent
+    GridComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

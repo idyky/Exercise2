@@ -1,5 +1,5 @@
 <div *ngIf="users$ | async as users;">
-    <wj-flex-grid #flex [itemsSource]="users">
+    <wj-flex-grid #flex [itemsSource]="users" [selectionMode]="5">
         <wj-flex-grid-column [header]="'Id'" [binding]="'id'"></wj-flex-grid-column>
         <wj-flex-grid-column [header]="'Full Name'" [binding]="'name'" ></wj-flex-grid-column>
         <wj-flex-grid-column [header]="'Username'" [binding]="'username'"></wj-flex-grid-column>

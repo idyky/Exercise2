@@ -1,0 +1,13 @@
+<div *ngIf="users$ | async as users;">
+    <wj-flex-grid #flex [itemsSource]="users">
+        <wj-flex-grid-column [header]="'Id'" [binding]="'id'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Full Name'" [binding]="'name'" ></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Username'" [binding]="'username'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Email'" [binding]="'email'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Phone'" [binding]="'phone'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Website'" [binding]="'website'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Active'" [binding]="'active'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Percent'" [binding]="'percent'" [format]="'p2'"></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Cash On Hand'" [binding]="'cashOnHand'" [format]="'c'"></wj-flex-grid-column>
+    </wj-flex-grid> 
+</div>

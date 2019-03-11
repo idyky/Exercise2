@@ -23,5 +23,5 @@ export class User {
     active:boolean;
     percent:number;
     cashOnHand:number;
-    dateOfBirth:string;
+    dateOfBirth:Date;
 }

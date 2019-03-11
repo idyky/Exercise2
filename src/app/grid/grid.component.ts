@@ -20,6 +20,8 @@ export class GridComponent implements OnInit {
   filter: WjFlexGridFilter;
   displayInactive: boolean = true;
   userCollection: wjCore.CollectionView;
+  alreadyActiveAlert: boolean = false;
+  alreadyInactiveAlert: boolean = false;
 
   constructor(private data:DataService) {
   }
@@ -47,7 +49,6 @@ export class GridComponent implements OnInit {
 
   toggleInactive() {
     this.displayInactive = !this.displayInactive;
-    console.log(this.displayInactive);
     if (this.displayInactive == true) {
       this.grid.itemsSource = this.userCollection.items;
     }
@@ -64,8 +65,6 @@ export class GridComponent implements OnInit {
         }
         return true;
       }
-      //console.log(d.items);
-      //console.log(this.grid.itemsSource);
       cv.refresh();
       return cv.items;
   }
@@ -76,6 +75,10 @@ export class GridComponent implements OnInit {
       for (let i = 0; i < rows.length; i++) {
         if (rows[i].isSelected) {
           if (rows[i]._data.active == true) {
+            this.alreadyActiveAlert = true;
+            setTimeout(function() {
+              this.alreadyActiveAlert = false;
+            }.bind(this), 3000);
             console.log('Already active');
           }
           else {
@@ -92,6 +95,10 @@ export class GridComponent implements OnInit {
       for (let i = 0; i < rows.length; i++) {
         if (rows[i].isSelected) {
           if (rows[i]._data.active == false) {
+            this.alreadyInactiveAlert = true;
+            setTimeout(function() {
+              this.alreadyInativeAlert = false;
+            }.bind(this), 3000);
             console.log('Already inactive');
           }
           else {

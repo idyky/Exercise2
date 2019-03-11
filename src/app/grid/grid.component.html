@@ -1,7 +1,17 @@
 <div *ngIf="users$ | async as users;">
-    <wj-flex-grid #flex [itemsSource]="users" [selectionMode]="5">
+    <div>
+        <button (click)="setActive()">Set as Active</button>
+        <button (click)="setInactive()">Set as Inactive</button>
+        <input (change)="toggleInactive()" type="checkbox" />
+    </div>
+    <wj-flex-grid #flex [itemsSource]="users" 
+        [selectionMode]="5" 
+        (initialized)="initW3C(flex, filter)"
+        (resizedColumn)="resizedColumn(grid, $event)"
+        >
+        <wj-flex-grid-filter #filter (filterChanged)="changedFilter(filter)"></wj-flex-grid-filter>
         <wj-flex-grid-column [header]="'Id'" [binding]="'id'"></wj-flex-grid-column>
-        <wj-flex-grid-column [header]="'Full Name'" [binding]="'name'" ></wj-flex-grid-column>
+        <wj-flex-grid-column [header]="'Full Name'" [binding]="'name'"></wj-flex-grid-column>
         <wj-flex-grid-column [header]="'Username'" [binding]="'username'"></wj-flex-grid-column>
         <wj-flex-grid-column [header]="'Email'" [binding]="'email'"></wj-flex-grid-column>
         <wj-flex-grid-column [header]="'Phone'" [binding]="'phone'"></wj-flex-grid-column>

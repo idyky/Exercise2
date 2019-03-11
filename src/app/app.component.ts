@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import * as wjcGridFilter from 'wijmo/wijmo.grid.filter';
 
 @Component({
   selector: 'app-root',

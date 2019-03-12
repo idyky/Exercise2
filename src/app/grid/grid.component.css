@@ -1,9 +1,12 @@
 .wj-flexgrid {
     background-color: white;
-    /*
-    box-shadow: 4px 4px 10px 0px rgba(50, 50, 50, 0.75);
-    */
     margin-bottom: 12px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1210px;
+    }
 }
 
 .button-bar {

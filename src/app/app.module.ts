@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { WjGridModule } from 'wijmo/wijmo.angular2.grid';
 import { WjGridFilterModule } from "wijmo/wijmo.angular2.grid.filter";
@@ -20,8 +19,7 @@ import { DataService } from './services/data.service';
     AppRoutingModule,
     HttpClientModule,
     WjGridModule,
-    WjGridFilterModule,
-    FormsModule
+    WjGridFilterModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

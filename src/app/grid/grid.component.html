@@ -7,17 +7,16 @@
                 <label class="switch">
                     <input type="checkbox" (change)="toggleInactive()" >
                     <span class="slider round"></span>
-                </label>&nbsp;<label>Hide Inactive</label>
+                </label>&nbsp;&nbsp;
+                <label>Show Inactive</label>
             </div>
         </div>
         <div class="row grid">
             <wj-flex-grid #flex [itemsSource]="users" 
                 [selectionMode]="5" 
                 [headersVisibility] = "1"
-                (initialized)="initW3C(flex, filter)"
-                (resizedColumn)="resizedColumn(grid, $event)"
-                >
-                <wj-flex-grid-filter #filter (filterChanged)="changedFilter(filter)"></wj-flex-grid-filter>
+                (initialized)="initW3C(flex, filter)">
+                <wj-flex-grid-filter #filter></wj-flex-grid-filter>
                 <wj-flex-grid-column [header]="'Id'" [binding]="'id'" [width]="40"></wj-flex-grid-column>
                 <wj-flex-grid-column [header]="'Full Name'" [binding]="'name'" [width]="165"></wj-flex-grid-column>
                 <wj-flex-grid-column [header]="'Username'" [binding]="'username'" [width]="145"></wj-flex-grid-column>

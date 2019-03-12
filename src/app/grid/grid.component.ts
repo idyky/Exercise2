@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
-import { WjGridModule, WjFlexGrid } from 'wijmo/wijmo.angular2.grid';
-import { EventArgs } from 'wijmo/wijmo';
-import { CellRangeEventArgs, CellRange, HitTestInfo } from 'wijmo/wijmo.grid';
+import { WjFlexGrid } from 'wijmo/wijmo.angular2.grid';
 import { WjFlexGridFilter } from 'wijmo/wijmo.angular2.grid.filter';
 import { __metadata } from 'tslib';
 import * as wjCore from 'wijmo/wijmo';
@@ -18,7 +16,7 @@ export class GridComponent implements OnInit {
   users$:Observable<User[]>;
   grid: WjFlexGrid;
   filter: WjFlexGridFilter;
-  displayInactive: boolean = true;
+  showInactive: boolean = false;
   userCollection: wjCore.CollectionView;
   alreadyActiveAlert: boolean = false;
   alreadyInactiveAlert: boolean = false;
@@ -29,85 +27,89 @@ export class GridComponent implements OnInit {
   ngOnInit() {
     this.users$ = this.data.getUsers();
   }
-
+  // Set the variables after the FlexGrid initializes
   initW3C(grid: WjFlexGrid, filter: WjFlexGridFilter){
     this.grid = grid;
     this.filter = filter;
-
     this.userCollection = new wjCore.CollectionView(this.grid.itemsSource);
   }
-
-  resizedColumn(grid, e) {
-    console.log('resizedColumn');
-    grid.autoSizeRows();
-    grid.select(new CellRange(1, 1), true);
-  }
-
-  changedFilter(e: WjFlexGridFilter) {
-    console.log(e);
-  } 
-
+  // Hide/Show inactive users
   toggleInactive() {
-    this.displayInactive = !this.displayInactive;
-    if (this.displayInactive == true) {
+    // Change status
+    this.showInactive = !this.showInactive;
+    if (this.showInactive == true) {
+      // Show inactive users
       this.grid.itemsSource = this.userCollection.items;
     }
     else {
+      // Filter and hide inactive users
       this.grid.itemsSource = this.filterInactive();
     }
   }
-
+  // Filter inactive users, returns filtered users
   filterInactive() {
     let cv = new wjCore.CollectionView(this.grid.itemsSource);
-      cv.filter = function(item) {
-        if (this.filter) {
-          return item.active == true;
-        }
-        return true;
+    cv.filter = function(item) {
+      if (this.filter) {
+        return item.active == true;
       }
-      cv.refresh();
-      return cv.items;
+      return true;
+    }
+    cv.refresh();
+    return cv.items;
   }
-
+  // Set user to active
   setActive() {
     if (this.grid != null) {
-      var rows = this.grid.rows;
+      // Get an array of grid rows
+      let rows = this.grid.rows;
+      // Loop through each row in the grid
       for (let i = 0; i < rows.length; i++) {
+        // Check if the row is selected
         if (rows[i].isSelected) {
+          // Check if the user is already active
           if (rows[i]._data.active == true) {
             this.alreadyActiveAlert = true;
             setTimeout(function() {
               this.alreadyActiveAlert = false;
-            }.bind(this), 3000);
-            console.log('Already active');
+            }.bind(this), 2500);
+            //console.log('Already active');
           }
           else {
+            // Set the user to active
             this.grid.setCellData(i, 'active', true);
           }
         }
       }
     }
   }
-
+  // Set user to inactive
   setInactive() {
     if (this.grid != null) {
-      var rows = this.grid.rows;
+      // Get an array of grid rows
+      let rows = this.grid.rows;
+      // Loop through each row in the grid
       for (let i = 0; i < rows.length; i++) {
+        // Check if the row is selected
         if (rows[i].isSelected) {
+          // Check if the user is already inactive
           if (rows[i]._data.active == false) {
             this.alreadyInactiveAlert = true;
             setTimeout(function() {
-              this.alreadyInativeAlert = false;
-            }.bind(this), 3000);
-            console.log('Already inactive');
+              this.alreadyInactiveAlert = false;
+            }.bind(this), 2500);
+            //console.log('Already inactive');
           }
           else {
+            // Set the user to active
             this.grid.setCellData(i, 'active', false);
-            if(this.displayInactive == false) {
-              this.grid.itemsSource = this.filterInactive();
-            }
           }
         }
+      }
+      // Check if we are displaying inactive users
+      if(this.showInactive == false) {
+        // Filter the users to only show active
+        this.grid.itemsSource = this.filterInactive();
       }
     }
   }

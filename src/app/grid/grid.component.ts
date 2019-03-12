@@ -72,7 +72,7 @@ export class GridComponent implements OnInit {
             this.alreadyActiveAlert = true;
             setTimeout(function() {
               this.alreadyActiveAlert = false;
-            }.bind(this), 2500);
+            }.bind(this), 3000);
             //console.log('Already active');
           }
           else {
@@ -97,7 +97,7 @@ export class GridComponent implements OnInit {
             this.alreadyInactiveAlert = true;
             setTimeout(function() {
               this.alreadyInactiveAlert = false;
-            }.bind(this), 2500);
+            }.bind(this), 3000);
             //console.log('Already inactive');
           }
           else {
